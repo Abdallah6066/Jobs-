@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>وظائف السعودية - منصة التوظيف الأولى</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: #f0f4f8;
+            color: #1a202c;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .header {
+            background: linear-gradient(135deg, #0f2b4a, #1a4a7a);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 24px;
+            margin-bottom: 40px;
+            box-shadow: 0 12px 30px rgba(15, 43, 74, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        .header::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 60%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.04);
+            transform: rotate(15deg);
+        }
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+        .header h1 i {
+            margin-left: 15px;
+        }
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .search-bar {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 60px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        .search-bar input,
+        .search-bar select {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 40px;
+            background: #f0f4f8;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            min-width: 150px;
+            outline: none;
+        }
+        .search-bar button {
+            background: #e67e22;
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-family: 'Tajawal', sans-serif;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+        .search-bar button:hover {
+            background: #d35400;
+        }
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 28px;
+        }
+        .job-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            transition: 0.3s ease;
+            border-right: 5px solid #1a4a7a;
+            cursor: pointer;
+        }
+        .job-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(15, 43, 74, 0.15);
+        }
+        .job-card .badge {
+            background: #e67e22;
+            color: white;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        .job-card h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #0f2b4a;
+            margin-bottom: 4px;
+        }
+        .job-card .company {
+            font-weight: 500;
+            color: #2d3748;
+            margin-bottom: 14px;
+        }
+        .job-card .company i {
+            color: #1a4a7a;
+            margin-left: 6px;
+        }
+        .job-card .brief {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+        .job-card .meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: #2d3748;
+        }
+        .job-card .meta i {
+            color: #1a4a7a;
+            width: 20px;
+        }
+        /* صفحة التفاصيل */
+        .detail-page {
+            display: none;
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .detail-page.active {
+            display: block;
+        }
+        .detail-page .back-btn {
+            background: none;
+            border: none;
+            color: #1a4a7a;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 25px;
+            font-family: 'Tajawal', sans-serif;
+        }
+        .detail-page .back-btn i {
+            margin-left: 10px;
+        }
+        .detail-page h2 {
+            font-size: 2rem;
+            color: #0f2b4a;
+            margin-bottom: 8px;
+        }
+        .detail-page .company-detail {
+            font-size: 1.2rem;
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+        .detail-page .full-description {
+            line-height: 1.9;
+            color: #2d3748;
+            margin: 25px 0;
+            font-size: 1.05rem;
+        }
+        .detail-page .contact-box {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 16px;
+            margin-top: 25px;
+            border-right: 4px solid #e67e22;
+        }
+        .detail-page .contact-box h4 {
+            margin-bottom: 12px;
+            color: #0f2b4a;
+        }
+        .detail-page .contact-box p {
+            margin: 8px 0;
+            font-size: 1.05rem;
+        }
+        .detail-page .contact-box i {
+            width: 28px;
+            color: #1a4a7a;
+        }
+        .detail-page .apply-btn {
+            background: #e67e22;
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+            width: 100%;
+        }
+        .detail-page .apply-btn:hover {
+            background: #d35400;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #4a5568;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 25px;
+        }
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            .search-bar {
+                flex-direction: column;
+            }
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+            .detail-page {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- الهيدر -->
+        <div class="header">
+            <h1><i class="fas fa-briefcase"></i> وظائف السعودية</h1>
+            <p>أحدث الفرص الوظيفية في مختلف المدن</p>
+            <div class="search-bar">
+                <input type="text" placeholder="ابحث عن وظيفة..." id="searchInput" />
+                <select id="cityFilter">
+                    <option value="all">جميع المدن</option>
+                    <option value="الرياض">الرياض</option>
+                    <option value="جدة">جدة</option>
+                    <option value="الدمام">الدمام</option>
+                    <option value="مكة">مكة</option>
+                    <option value="الخبر">الخبر</option>
+                </select>
+                <button onclick="filterJobs()"><i class="fas fa-search"></i> بحث</button>
+            </div>
+        </div>
+
+        <!-- صفحة التفاصيل (مخفية افتراضياً) -->
+        <div class="detail-page" id="detailPage">
+            <button class="back-btn" onclick="closeDetail()"><i class="fas fa-arrow-right"></i> العودة للقائمة</button>
+            <h2 id="detailTitle"></h2>
+            <div class="company-detail" id="detailCompany"></div>
+            <div class="full-description" id="detailDescription"></div>
+            <div class="contact-box">
+                <h4><i class="fas fa-address-card"></i> معلومات التواصل</h4>
+                <p><i class="fas fa-phone-alt"></i> <span id="detailPhone"></span></p>
+                <p><i class="fas fa-envelope"></i> <span id="detailEmail">falonri@mert.com</span></p>
+                <p><i class="fas fa-map-marker-alt"></i> <span id="detailLocation"></span></p>
+            </div>
+            <button class="apply-btn" onclick="alert('تم إرسال طلبك بنجاح! سيتم التواصل معك خلال 24 ساعة.')">
+                <i class="fas fa-paper-plane"></i> تقديم الطلب الآن
+            </button>
+        </div>
+
+        <!-- شبكة الوظائف -->
+        <div class="jobs-grid" id="jobsGrid">
+            <!-- سيتم إنشاء البطاقات بواسطة JavaScript -->
+        </div>
+
+        <div class="footer">
+            © 2026 منصة وظائف السعودية - جميع الحقوق محفوظة
+        </div>
+    </div>
+
+    <script>
+        // قاعدة بيانات الوظائف (20 وظيفة)
+        const jobs = [{
+            id: 1,
+            title: 'مندوب توصيل طلبات',
+            company: 'شركة توصيل سريع - الرياض',
+            city: 'الرياض',
+            phone: '050 123 4567',
+            email: 'falonri@mert.com',
+            description: 'نبحث عن مندوبين توصيل للعمل في مدينة الرياض. يشترط امتلاك سيارة أو دراجة نارية، القدرة على العمل لساعات مرنة، ومعرفة بطرق المدينة.'
+        }, {
+            id: 2,
+            title: 'حارس أمن',
+            company: 'مجموعة الأمن المتكامل - جدة',
+            city: 'جدة',
+            phone: '055 987 6543',
+            email: 'falonri@mert.com',
+            description: 'مطلوب حارس أمن لمجمع تجاري في جدة. دوام 12 ساعة بنظام الورديات. يشترط اللياقة البدنية والالتزام بالمواعيد.'
+        }, {
+            id: 3,
+            title: 'كاشير / أمين صندوق',
+            company: 'أسواق المزرعة - الدمام',
+            city: 'الدمام',
+            phone: '053 222 3344',
+            email: 'falonri@mert.com',
+            description: 'مطلوب كاشير للعمل في أحد فروع أسواق المزرعة بالدمام. خبرة سابقة في التعامل مع ماكينة الصراف وأنظمة البيع.'
+        }, {
+            id: 4,
+            title: 'عامل نظافة',
+            company: 'شركة النظافة الأولى - مكة',
+            city: 'مكة',
+            phone: '056 111 2233',
+            email: 'falonri@mert.com',
+            description: 'مطلوب عمال نظافة للعمل في منشآت حكومية بمكة المكرمة. دوام صباحي مع توفير النقل.'
+        }, {
+            id: 5,
+            title: 'مساعد مخزن',
+            company: 'مخازن العصرية - الرياض',
+            city: 'الرياض',
+            phone: '050 444 5566',
+            email: 'falonri@mert.com',
+            description: 'مطلوب مساعد مخزن للعمل في مستودعات الرياض. يشترط القدرة على رفع الأحمال وتنظيم البضائع.'
+        }, {
+            id: 6,
+            title: 'مضيف طعام (كوفي شوب)',
+            company: 'كافيه باريستا - جدة',
+            city: 'جدة',
+            phone: '055 777 8899',
+            email: 'falonri@mert.com',
+            description: 'نبحث عن مضيفين طعام للعمل في كافيه بجدة. يشترط مهارات التواصل مع الزبائن وسرعة التعامل.'
+        }, {
+            id: 7,
+            title: 'سائق توصيل (شاحنة صغيرة)',
+            company: 'شركة نقل سريع - الخبر',
+            city: 'الخبر',
+            phone: '053 333 4455',
+            email: 'falonri@mert.com',
+            description: 'مطلوب سائقين لشاحنات صغيرة لتوصيل البضائع داخل المنطقة الشرقية. رخصة قيادة سارية المفعول.'
+        }, {
+            id: 8,
+            title: 'موظف استقبال (فندق)',
+            company: 'فندق الأثير - الرياض',
+            city: 'الرياض',
+            phone: '011 222 3344',
+            email: 'falonri@mert.com',
+            description: 'مطلوب موظف استقبال للعمل في فندق الأثير بالرياض. يشترط المظهر اللائق ومهارات الحاسب الأساسية.'
+        }, {
+            id: 9,
+            title: 'بائع في متجر إلكترونيات',
+            company: 'جرير تك - جدة',
+            city: 'جدة',
+            phone: '055 666 7788',
+            email: 'falonri@mert.com',
+            description: 'مطلوب بائعين لمتاجر الإلكترونيات في جدة. خبرة في المبيعات مفضلة.'
+        }, {
+            id: 10,
+            title: 'منسق حدائق / عمال زراعة',
+            company: 'حدائق الخليج - الدمام',
+            city: 'الدمام',
+            phone: '056 999 0011',
+            email: 'falonri@mert.com',
+            description: 'مطلوب عمال زراعة لتنسيق وصيانة الحدائق في الدمام. يشترط الخبرة في التعامل مع النباتات.'
+        }, {
+            id: 11,
+            title: 'مساعد طباخ (مطعم)',
+            company: 'مطعم الأصيل - مكة',
+            city: 'مكة',
+            phone: '052 333 4455',
+            email: 'falonri@mert.com',
+            description: 'مطلوب مساعد طباخ في مطعم شعبي بمكة. يشترط الخبرة في تجهيز المكونات والالتزام بالمعايير الصحية.'
+        }, {
+            id: 12,
+            title: 'عامل خط إنتاج (مصنع)',
+            company: 'مصانع الوطنية - الرياض',
+            city: 'الرياض',
+            phone: '011 444 5566',
+            email: 'falonri@mert.com',
+            description: 'مطلوب عمال خط إنتاج في مصنع المواد الغذائية بالرياض. دوام بنظام الورديات.'
+        }, {
+            id: 13,
+            title: 'مندوب مبيعات (مواد غذائية)',
+            company: 'شركة الغذاء الصحي - جدة',
+            city: 'جدة',
+            phone: '055 222 3344',
+            email: 'falonri@mert.com',
+            description: 'مطلوب مندوب مبيعات لتسويق المنتجات الغذائية في جدة. يشترط مهارات التفاوض وبناء العلاقات.'
+        }, {
+            id: 14,
+            title: 'حمال / عمال تحميل وتفريغ',
+            company: 'شركة الشحن السريع - الدمام',
+            city: 'الدمام',
+            phone: '053 777 8899',
+            email: 'falonri@mert.com',
+            description: 'مطلوب عمال تحميل وتفريغ للعمل في مستودعات الدمام. يشترط اللياقة البدنية.'
+        }, {
+            id: 15,
+            title: 'مشغل آلة طباعة',
+            company: 'مطابع الرياض',
+            city: 'الرياض',
+            phone: '011 555 6677',
+            email: 'falonri@mert.com',
+            description: 'مطلوب مشغلي آلات طباعة للعمل في مطابع الرياض. خبرة سابقة في تشغيل الماكينات.'
+        }, {
+            id: 16,
+            title: 'موظف خدمة عملاء (مركز اتصال)',
+            company: 'خدمة الأولى - جدة',
+            city: 'جدة',
+            phone: '055 111 2233',
+            email: 'falonri@mert.com',
+            description: 'مطلوب موظفين لخدمة العملاء عبر الهاتف في جدة. يشترط مهارات التواصل والاستماع الجيد.'
+        }, {
+            id: 17,
+            title: 'سائق توصيل (دراجة نارية)',
+            company: 'طلبات أونلاين - الرياض',
+            city: 'الرياض',
+            phone: '050 888 9900',
+            email: 'falonri@mert.com',
+            description: 'مطلوب سائقين لدراجات نارية لتوصيل الطلبات في الرياض. يشترط رخصة دراجة نارية.'
+        }, {
+            id: 18,
+            title: 'منظم معارض / مندوب دعاية',
+            company: 'شركة إبداع التسويق - جدة',
+            city: 'جدة',
+            phone: '055 444 5566',
+            email: 'falonri@mert.com',
+            description: 'مطلوب منظمين للمعارض والفعاليات في جدة. يشترط مهارات التنظيم والتواصل.'
+        }, {
+            id: 19,
+            title: 'حارس مواقف سيارات',
+            company: 'مراكز العثيم - الدمام',
+            city: 'الدمام',
+            phone: '053 666 7788',
+            email: 'falonri@mert.com',
+            description: 'مطلوب حراس مواقف سيارات في مجمعات العثيم بالدمام. دوام مرن.'
+        }, {
+            id: 20,
+            title: 'مساعد إداري (استقبال)',
+            company: 'شركة المستقبل - الرياض',
+            city: 'الرياض',
+            phone: '011 777 8899',
+            email: 'falonri@mert.com',
+            description: 'مطلوب مساعد إداري للاستقبال في شركة المستقبل بالرياض. يشترط مهارات الحاسب والترتيب.'
+        }];
+
+        // دالة لعرض البطاقات
+        function renderJobs(filteredJobs) {
+            const grid = document.getElementById('jobsGrid');
+            grid.innerHTML = '';
+            filteredJobs.forEach(job => {
+                const card = document.createElement('div');
+                card.className = 'job-card';
+                card.setAttribute('data-id', job.id);
+                card.innerHTML = `
+                    <span class="badge">بدون مؤهل</span>
+                    <h3>${job.title}</h3>
+                    <div class="company"><i class="fas fa-building"></i> ${job.company}</div>
+                    <div class="brief">${job.description.substring(0, 65)}...</div>
+                    <div class="meta">
+                        <span><i class="fas fa-map-marker-alt"></i> ${job.city}</span>
+                        <span><i class="fas fa-phone-alt"></i> ${job.phone}</span>
+                    </div>
+                `;
+                card.addEventListener('click', () => openDetail(job.id));
+                grid.appendChild(card);
+            });
+        }
+
+        // دالة لعرض صفحة التفاصيل
+        function openDetail(id) {
+            const job = jobs.find(j => j.id === id);
+            if (!job) return;
+            document.getElementById('detailTitle').textContent = job.title;
+            document.getElementById('detailCompany').textContent = job.company;
+            document.getElementById('detailDescription').textContent = job.description;
+            document.getElementById('detailPhone').textContent = job.phone;
+            document.getElementById('detailLocation').textContent = job.city;
+            // إخفاء القائمة وإظهار التفاصيل
+            document.getElementById('jobsGrid').style.display = 'none';
+            document.querySelector('.header').style.display = 'none';
+            document.querySelector('.footer').style.display = 'none';
+            document.getElementById('detailPage').classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // دالة للعودة للقائمة
+        function closeDetail() {
+            document.getElementById('jobsGrid').style.display = 'grid';
+            document.querySelector('.header').style.display = 'block';
+            document.querySelector('.footer').style.display = 'block';
+            document.getElementById('detailPage').classList.remove('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // فلترة الوظائف
+        function filterJobs() {
+            const searchVal = document.getElementById('searchInput').value.trim().toLowerCase();
+            const cityVal = document.getElementById('cityFilter').value;
+            let filtered = jobs.filter(job => {
+                const matchCity = cityVal === 'all' || job.city === cityVal;
+                const matchSearch = job.title.includes(searchVal) || job.company.includes(searchVal) || job.description
+                    .includes(searchVal);
+                return matchCity && matchSearch;
+            });
+            renderJobs(filtered);
+        }
+
+        // تحميل أولي
+        renderJobs(jobs);
+
+        // دعم البحث بالضغط على Enter
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') filterJobs();
+        });
+    </script>
+</body>
+  </html>
