@@ -1,53 +1,124 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
-<title>Adults Only</title>
+<meta name="robots" content="noindex, nofollow">
+<title>جارٍ تحويلك…</title>
 <style>
-  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#111;color:#fff;font-family:Tahoma,Arial,sans-serif;padding:16px;box-sizing:border-box}
-  .box{max-width:420px;width:100%;background:#1c1c1c;border-radius:16px;padding:28px 22px;text-align:center}
-  h1{font-size:22px;margin:0 0 12px}
-  p{color:#bbb;line-height:1.8;margin:0 0 22px;font-size:15px}
-  a{display:block;padding:14px;border-radius:10px;text-decoration:none;font-size:16px;margin-top:10px}
-  .yes{background:#e50914;color:#fff}
-  .no{background:#333;color:#ddd}
+  :root {
+    --bg: #f7f5f8;
+    --card: #ffffff;
+    --text: #2a2030;
+    --muted: #6b6075;
+    --accent: #a3305f;
+    --track: #e6dbe5;
+    --tag-bg: #efe6ee;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16111a;
+      --card: #211a28;
+      --text: #f3edf6;
+      --muted: #b3a7bd;
+      --accent: #e0709b;
+      --track: #352a3e;
+      --tag-bg: #352a3e;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", Tahoma, "Noto Sans Arabic", Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .box {
+    background: var(--card);
+    width: 100%;
+    max-width: 440px;
+    padding: 34px 26px 28px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,.08);
+  }
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--muted);
+    font-size: .8rem;
+    padding: 4px 12px;
+    border-radius: 99px;
+    margin-bottom: 18px;
+  }
+  h1 { font-size: 1.35rem; margin: 0 0 10px; line-height: 1.6; }
+  p { margin: 0 0 18px; color: var(--muted); line-height: 1.8; }
+  #count { color: var(--accent); font-weight: 700; }
+  .bar { height: 6px; background: var(--track); border-radius: 99px; overflow: hidden; margin-bottom: 22px; }
+  .bar i { display: block; height: 100%; width: 0; background: var(--accent); }
+  .btns { display: flex; gap: 10px; }
+  .btns a, .btns button {
+    flex: 1;
+    padding: 13px 10px;
+    border-radius: 10px;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .go { background: var(--accent); color: #fff; border: 2px solid var(--accent); }
+  .cancel { background: transparent; color: var(--text); border: 2px solid var(--track); }
+  .btns a:focus-visible, .btns button:focus-visible { outline: 3px solid var(--text); outline-offset: 3px; }
 </style>
 </head>
 <body>
-<div class="box">
-  <h1 id="t"></h1>
-  <p id="d"></p>
-  <a class="yes" id="y" href="https://www.profitableratecpmnetwork.com/mg92sq641i?key=95386702a1b6bd803f7f0299c5204a84"></a>
-  <a class="no" id="n" href="https://www.profitableratecpmnetwork.com/mg92sq641i?key=95386702a1b6bd803f7f0299c5204a84"></a>
-</div>
+  <main class="box">
+    <span class="tag">عروض الزواج 💞</span>
+    <h1 id="title">سيتم توجيهك إلى موقع عروض الزواج</h1>
+    <p id="msg">التحويل بعد <span id="count">3</span> ثوانٍ. الموقع تابع لجهة إعلانية خارجية.</p>
+    <div class="bar"><i id="fill"></i></div>
+    <div class="btns">
+      <a class="go" id="link" href="#">اذهب الآن</a>
+      <button class="cancel" id="cancel" type="button">إلغاء</button>
+    </div>
+  </main>
+
 <script>
-var text = {
-  ar: {
-    title: "تنبيه: محتوى للبالغين",
-    h: "🔞 محتوى للبالغين فقط",
-    d: "يحتوي الموقع التالي على محتوى مخصص لمن بلغ 18 عاماً فأكثر. بالضغط على \"أنا أكبر من 18\" فإنك تُقرّ بأن عمرك 18 عاماً أو أكثر.",
-    y: "أنا أكبر من 18 عاماً — دخول",
-    n: "عمري أقل من 18 — خروج"
-  },
-  en: {
-    title: "Adults Only",
-    h: "🔞 Adults Only",
-    d: "The following site contains content intended for people aged 18 or older. By clicking \"I am 18 or older\", you confirm that you are at least 18 years old.",
-    y: "I am 18 or older — Enter",
-    n: "I am under 18 — Exit"
-  }
-};
-var lang = (navigator.language || "en").toLowerCase().indexOf("ar") === 0 ? "ar" : "en";
-var s = text[lang];
-document.documentElement.lang = lang;
-document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-document.title = s.title;
-document.getElementById("t").textContent = s.h;
-document.getElementById("d").textContent = s.d;
-document.getElementById("y").textContent = s.y;
-document.getElementById("n").textContent = s.n;
+  // ✏️ ضع رابط السمارت لينك هنا
+  var TARGET_URL = "https://www.profitableratecpmnetwork.com/mg92sq641i?key=95386702a1b6bd803f7f0299c5204a84";
+  // ✏️ مدة الانتظار بالثواني
+  var SECONDS = 3;
+
+  var link = document.getElementById("link");
+  var count = document.getElementById("count");
+  var fill = document.getElementById("fill");
+  link.href = TARGET_URL;
+  count.textContent = SECONDS;
+
+  var start = Date.now();
+  var total = SECONDS * 1000;
+
+  var timer = setInterval(function () {
+    var passed = Date.now() - start;
+    fill.style.width = Math.min(100, (passed / total) * 100) + "%";
+    count.textContent = Math.max(0, Math.ceil((total - passed) / 1000));
+    if (passed >= total) {
+      clearInterval(timer);
+      window.location.replace(TARGET_URL);
+    }
+  }, 100);
+
+  document.getElementById("cancel").addEventListener("click", function () {
+    clearInterval(timer);
+    fill.style.width = "0";
+    document.getElementById("title").textContent = "تم إلغاء التحويل";
+    document.getElementById("msg").textContent = "يمكنك إغلاق هذه الصفحة، أو الضغط على «اذهب الآن» إن غيّرت رأيك.";
+    this.style.display = "none";
+  });
 </script>
 </body>
 </html>
