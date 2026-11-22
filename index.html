@@ -1,129 +1,487 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>عروض زواج حقيقية 💍</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>زين - هدية الذكرى الثلاثين</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
 
-<style>
-* {
-    box-sizing: border-box;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
-    background: linear-gradient(135deg, #fff0f5, #f5e6f0, #fce4ec);
-    color: #392433;
-}
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+        }
 
-.card {
-    width: 100%;
-    max-width: 410px;
-    background: #ffffff;
-    padding: 38px 25px;
-    border-radius: 24px;
-    text-align: center;
-    box-shadow: 0 12px 45px rgba(150, 50, 100, 0.12);
-}
+        /* الشريط العلوي (شعار زين) */
+        .top-bar {
+            background: white;
+            text-align: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .top-bar h1 {
+            color: #000;
+            font-size: 40px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            font-family: Arial, sans-serif;
+        }
 
-.icon {
-    width: 85px;
-    height: 85px;
-    margin: 0 auto 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #fff0f5;
-    font-size: 43px;
-}
+        /* الشريط الوردي */
+        .pink-bar {
+            background-color: #a3005a;
+            color: white;
+            text-align: center;
+            padding: 10px 15px;
+            font-weight: bold;
+            font-size: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-h1 {
-    font-size: 25px;
-    margin: 0 0 15px;
-    color: #a83267;
-}
+        /* الحاوية الرئيسية */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #f7f7f7;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-.description {
-    font-size: 15px;
-    line-height: 2;
-    color: #776775;
-    margin-bottom: 25px;
-}
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
 
-.info {
-    background: #fff5f8;
-    border: 1px solid #f8dce8;
-    border-radius: 13px;
-    padding: 13px;
-    font-size: 13px;
-    color: #87516c;
-    margin-bottom: 25px;
-}
+        /* صورة بانر زين (التي أرسلتها) */
+        .zain-banner-img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: block;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
 
-.button {
-    display: block;
-    width: 100%;
-    padding: 16px;
-    border-radius: 13px;
-    background: linear-gradient(135deg, #c13d78, #922653);
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-    text-decoration: none;
-    box-shadow: 0 6px 18px rgba(173, 45, 100, 0.22);
-    transition: 0.2s;
-}
+        /* الاستبيان */
+        .survey-question {
+            font-size: 17px;
+            font-weight: bold;
+            text-align: right;
+            margin: 20px 0;
+        }
+        .btn-option {
+            background-color: #e6007e;
+            color: white;
+            width: 100%;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #c4006a;
+            cursor: pointer;
+            margin-bottom: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-.button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 9px 22px rgba(173, 45, 100, 0.3);
-}
+        /* التعليقات */
+        .comments-container {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .comments-header {
+            display: flex;
+            justify-content: space-between;
+            background: #f0f2f5;
+            padding: 10px;
+            font-weight: bold;
+            color: #1a73e8;
+            border-top: 1px solid #ddd;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .comment {
+            display: flex;
+            gap: 10px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .comment img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .comment-content h4 {
+            font-size: 15px;
+            margin-bottom: 3px;
+            font-weight: bold;
+        }
+        .comment-content p {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.4;
+        }
 
-.footer {
-    margin-top: 25px;
-    font-size: 12px;
-    color: #a394a0;
-}
-</style>
+        /* شاشة التحقق */
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #e0e0e0;
+            border-top: 6px solid #e6007e;
+            border-radius: 50%;
+            margin: 30px auto;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .verify-text { text-align: center; font-weight: bold; font-size: 16px; margin-bottom: 20px; }
+
+        /* شاشة التهنئة (الاحتفال) */
+        #page-congrats {
+            background: url('https://www.transparenttextures.com/patterns/confetti.png') repeat;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+        }
+        
+        /* صورة الشروط (التي أرسلتها بدل المال) */
+        .rule-img {
+            width: 100%;
+            max-width: 100%;
+            display: block;
+            margin: 15px auto;
+            border-radius: 8px;
+        }
+        
+        .congrats-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .btn-continue-main {
+            background-color: #e6007e;
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        /* شاشة المشاركة وشريط التقدم */
+        .share-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: right;
+            margin-top: 20px;
+        }
+        .btn-share {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+            border: none;
+            cursor: pointer;
+            gap: 10px;
+        }
+        .btn-wa { background-color: #25D366; }
+        .btn-msg { background: linear-gradient(45deg, #0084FF, #8a2be2); }
+
+        .progress-text { text-align: center; font-size: 14px; font-weight: bold; margin: 15px 0 5px 0; }
+        .progress-container {
+            width: 100%; background-color: #e0e0e0; height: 35px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 15px; position: relative;
+            border: 1px solid #ccc; border-radius: 4px; overflow: hidden;
+        }
+        .progress-fill {
+            position: absolute; top: 0; right: 0; height: 100%;
+            background-color: #28a745; width: 0%; transition: width 0.8s ease-in-out; z-index: 1;
+        }
+        .progress-text-val { position: relative; z-index: 2; }
+        
+        .btn-continue-disabled {
+            background-color: #ff99cc;
+            color: white; width: 100%; padding: 15px; border-radius: 6px;
+            font-size: 18px; font-weight: bold; border: none; cursor: not-allowed;
+            margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+
+        .hidden { display: none !important; }
+    </style>
 </head>
-
 <body>
 
-<main class="card">
-
-    <div class="icon">💍</div>
-
-    <h1>عروض زواج حقيقية</h1>
-
-    <p class="description">
-        اكتشف عروض الزواج والتعارف، وتعرّف على أشخاص جدد
-        يبحثون عن شريك الحياة وبناء علاقة جادة.
-    </p>
-
-    <div class="info">
-        سيتم توجيهك إلى صفحة العرض عند الضغط على الزر.
+    <div class="top-bar">
+        <h1>zain</h1>
     </div>
 
-    <a class="button"
-       href="https://www.profitableratecpmnetwork.com/mg92sq641i?key=95386702a1b6bd803f7f0299c5204a84"
-       target="_blank"
-       rel="nofollow sponsored noopener">
-       متابعة إلى العرض ←
-    </a>
-
-    <div class="footer">
-        نتمنى لك التوفيق 💗
+    <div class="pink-bar">
+        <span>2026/11/22</span>
+        <span>زين - هدية الذكرى الثلاثين!</span>
     </div>
 
-</main>
+    <div class="container">
+        
+        <!-- ================= 1. الاستبيان ================= -->
+        <div id="page-survey">
+            <h1 style="font-size: 22px;">تهانينا!</h1>
+            <p style="text-align: center; font-weight: bold; font-size: 15px; margin-bottom: 15px;">زين - هدية الذكرى الثلاثين!<br>املأ هذا الاستبيان للحصول على فرصة الفوز بـ 50,000 ج.س.</p>
+            
+            <!-- 🟢 رابط صورة زين البداية -->
+            <img src="https://dlrjc.buzz/static/images/topimage/ar/01.jpg" alt="Zain Banner" class="zain-banner-img">
 
+            <!-- الأسئلة -->
+            <div id="q1">
+                <div class="survey-question">السؤال 1 من 4: منذ متى وأنت تستخدم خدمات زين؟</div>
+                <button class="btn-option" onclick="nextQuestion(1)">أقل من سنة</button>
+                <button class="btn-option" onclick="nextQuestion(1)">1-5 سنوات</button>
+                <button class="btn-option" onclick="nextQuestion(1)">6-10 سنوات</button>
+                <button class="btn-option" onclick="nextQuestion(1)">أكثر من 10 سنوات</button>
+            </div>
+            <div id="q2" class="hidden">
+                <div class="survey-question">السؤال 2 من 4: ما رأيك في خدمات زين خلال الثلاثين عاماً الماضية؟</div>
+                <button class="btn-option" onclick="nextQuestion(2)">ممتازة</button>
+                <button class="btn-option" onclick="nextQuestion(2)">جيدة جداً</button>
+                <button class="btn-option" onclick="nextQuestion(2)">جيدة</button>
+                <button class="btn-option" onclick="nextQuestion(2)">تحتاج تحسين</button>
+            </div>
+            <div id="q3" class="hidden">
+                <div class="survey-question">السؤال 3 من 4: ما هي الفئة العمرية التي تنتمي إليها؟</div>
+                <button class="btn-option" onclick="nextQuestion(3)">أقل من 18</button>
+                <button class="btn-option" onclick="nextQuestion(3)">18-35</button>
+                <button class="btn-option" onclick="nextQuestion(3)">36-50</button>
+                <button class="btn-option" onclick="nextQuestion(3)">أكثر من 50</button>
+            </div>
+            <div id="q4" class="hidden">
+                <div class="survey-question">السؤال 4 من 4: ما هو جنسك؟</div>
+                <button class="btn-option" onclick="showVerification()">ذكر</button>
+                <button class="btn-option" onclick="showVerification()">أنثى</button>
+                <button class="btn-option" onclick="showVerification()">أفضل عدم الإفصاح</button>
+            </div>
+
+            <!-- التعليقات (المحدثة) -->
+            <div class="comments-container">
+                <div class="comments-header"><span>تعليقات</span><span>10 / 198</span></div>
+                
+                <div class="comment">
+                    <img src="https://i.pravatar.cc/150?img=11" alt="User">
+                    <div class="comment-content">
+                        <h4>عبدالله الشيخ الصديق آل الشيخ</h4>
+                        <p>لم أصدق في البداية، لكني استلمت الجائزة فعلاً. شكراً زين على هذه المناسبة الرائعة!</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <img src="https://i.pravatar.cc/150?img=5" alt="User">
+                    <div class="comment-content">
+                        <h4>Raya'n Mo'awya</h4>
+                        <p>شاركت في الاستبيان وفزت بـ 50,000 ج.س، تجربة ممتازة وسأخبر صديقاتي بها.</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <img src="https://i.pravatar.cc/150?img=12" alt="User">
+                    <div class="comment-content">
+                        <h4>خالد قادم</h4>
+                        <p>ما توقعت أكسب، لكن المبلغ وصلني بسرعة. مبروك علينا بالذكرى الثلاثين!</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <img src="https://i.pravatar.cc/150?img=14" alt="User">
+                    <div class="comment-content">
+                        <h4>عبدالرافع علي الحسنابي</h4>
+                        <p>فعلاً زين شركة محترمة، استلمت 50,000 ج.س بدون أي تعقيد.</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <img src="https://i.pravatar.cc/150?img=15" alt="User">
+                    <div class="comment-content">
+                        <h4>عصام ابوالقاسم الغفري</h4>
+                        <p>أول مرة أشارك في فعالية حقيقية مثل هذه، الجائزة وصلت والحمد لله.</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <img src="https://i.pravatar.cc/150?img=33" alt="User">
+                    <div class="comment-content">
+                        <h4>ود العيس</h4>
+                        <p>استلمت ج.س 50,000 وأنا سعيد جداً، نتمنى المزيد من الفعاليات مثل هذه بمناسبة الذكرى الثلاثين.</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <img src="https://i.pravatar.cc/150?img=52" alt="User">
+                    <div class="comment-content">
+                        <h4>ثابت الأزير محجوب الأحسن</h4>
+                        <p>تهانينا لزين بالذكرى الثلاثين، وشكراً على الهدية التي استلمتها.</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <img src="https://i.pravatar.cc/150?img=59" alt="User">
+                    <div class="comment-content">
+                        <h4>You Sif Awad</h4>
+                        <p>والله شيء جميل، زين دائماً تفاجئنا بالعروض المميزة.</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <img src="https://i.pravatar.cc/150?img=60" alt="User">
+                    <div class="comment-content">
+                        <h4>محمد مكي أحمد مكي</h4>
+                        <p>جربت حظي ولم أخسر شيئاً، بل كسبت ج.س 50,000. أنصح الجميع بالمشاركة.</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <img src="https://i.pravatar.cc/150?img=68" alt="User">
+                    <div class="comment-content">
+                        <h4>الباحث عن السكينة</h4>
+                        <p>في عمري هذا نادراً ما أثق بالعروض، لكن هذه المرة زين أثبتت مصداقيتها.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 2. شاشة التحقق ================= -->
+        <div id="page-verify" class="hidden">
+            <h1 style="font-size: 24px; margin-top: 20px;">جارِ التحقق من إجابتك...</h1>
+            <div class="spinner"></div>
+            <p class="verify-text">لقد أجبت عن جميع الأسئلة الأربعة</p>
+        </div>
+
+        <!-- ================= 3. شاشة التهنئة (صورة الشروط) ================= -->
+        <div id="page-congrats" class="hidden">
+            <div class="congrats-title">تهانينا</div>
+            
+            <!-- 🟢 رابط صورة الشروط (بدل المال) -->
+            <img src="https://dlrjc.buzz/static/images/rule.jpg" class="rule-img" alt="Rules">
+            
+            <button class="btn-continue-main" onclick="showSharePage()">متابعة <span>➤</span></button>
+            
+            <!-- التعليق السفلي -->
+            <div style="margin-top: 20px;">
+                <div class="comment">
+                    <img src="https://i.pravatar.cc/150?img=5" alt="User">
+                    <div class="comment-content">
+                        <h4>Raya'n Mo'awya</h4>
+                        <p>شاركت في الاستبيان وفزت بـ 50,000 ج.س، تجربة ممتازة وسأخبر صديقاتي بها.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 4. شاشة المشاركة ================= -->
+        <div id="page-share" class="hidden">
+            <h1 style="font-size: 22px;">الخطوة الأخيرة!</h1>
+            <p style="text-align: center; font-weight: bold; font-size: 15px; margin-bottom: 20px;">يجب عليك مشاركة الرابط مع 20 صديقاً لتفعيل استلام الجائزة.</p>
+
+            <div class="share-box">
+                <button class="btn-share btn-wa" onclick="shareApp('wa')">WhatsApp <span>📞</span></button>
+                <button class="btn-share btn-msg" onclick="shareApp('msg')">Messenger <span>💬</span></button>
+
+                <div class="progress-text">يرجى الاستمرار في المشاركة حتى يصل تقدمك إلى 100%!</div>
+                
+                <div class="progress-container">
+                    <div class="progress-fill" id="progress-bar"></div>
+                    <span class="progress-text-val" id="progress-text">0%</span>
+                </div>
+
+                <button class="btn-continue-disabled" id="btn-continue" onclick="alert('جاري معالجة طلبك... شكراً لمشاركتك!')">متابعة <span>➤</span></button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let progress = 0;
+        const urlToShare = 'https://nzhds.buzz/unJB';
+        
+        const textToShare = 
+            'احتفالًا بالذكرى السنوية الثلاثين، تقدم زين هدية نقدية خاصة بقيمة ج.س 50,000 للجميع! 🎉\n\n' +
+            'كيفية الحصول على هديتك: انقر على الرابط أدناه للاطلاع على هديتك النقدية من زين بمناسبة الذكرى السنوية الثلاثين، بقيمة ج.س 50,000.\n\n' +
+            'لقد حصلت على هديتي للتو! ❤️\n\n' +
+            '🔗 ' + urlToShare;
+
+        // التنقل بين الأسئلة
+        function nextQuestion(currentQ) {
+            document.getElementById('q' + currentQ).classList.add('hidden');
+            document.getElementById('q' + (currentQ + 1)).classList.remove('hidden');
+        }
+
+        // شاشة التحقق
+        function showVerification() {
+            document.getElementById('page-survey').classList.add('hidden');
+            document.getElementById('page-verify').classList.remove('hidden');
+            
+            setTimeout(() => {
+                document.getElementById('page-verify').classList.add('hidden');
+                document.getElementById('page-congrats').classList.remove('hidden');
+            }, 3000); 
+        }
+
+        // الانتقال لصفحة المشاركة
+        function showSharePage() {
+            document.getElementById('page-congrats').classList.add('hidden');
+            document.getElementById('page-share').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        // المشاركة
+        function shareApp(platform) {
+            if (progress < 100) {
+                progress += 5; // 20 ضغطة لكتمال الشريط
+                if (progress > 100) progress = 100;
+                updateProgress();
+            }
+
+            if (platform === 'wa') {
+                window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(textToShare), '_blank');
+            } else {
+                window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(urlToShare), '_blank');
+            }
+        }
+
+        // تحديث شريط التقدم
+        function updateProgress() {
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').innerText = progress + '%';
+            
+            if (progress >= 100) {
+                let btn = document.getElementById('btn-continue');
+                btn.style.backgroundColor = '#e6007e'; 
+                btn.style.cursor = 'pointer';
+                btn.classList.remove('btn-continue-disabled');
+            }
+        }
+    </script>
 </body>
-</html>
+                            </html>
