@@ -49,9 +49,12 @@
 
         /* شاشة المشاركة */
         .share-box { background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 10px; padding: 20px; text-align: right; margin-top: 20px; }
-        .btn-share { display: flex; align-items: center; justify-content: center; width: 100%; padding: 12px; border-radius: 8px; color: white; font-weight: bold; font-size: 18px; margin-bottom: 10px; border: none; cursor: pointer; gap: 10px; }
+        .btn-share { display: flex; align-items: center; justify-content: center; width: 100%; padding: 12px; border-radius: 8px; color: white; font-weight: bold; font-size: 18px; margin-bottom: 10px; border: none; cursor: pointer; gap: 10px; transition: 0.3s; }
         .btn-wa { background-color: #25D366; }
         .btn-msg { background: linear-gradient(45deg, #0084FF, #8a2be2); }
+        
+        /* زر فيسبوك المعطل */
+        .btn-msg:disabled { background: #ccc !important; cursor: not-allowed; color: #888; }
 
         .progress-text { text-align: center; font-size: 14px; font-weight: bold; margin: 15px 0 5px 0; }
         .progress-container { width: 100%; background-color: #e0e0e0; height: 35px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 15px; position: relative; border: 1px solid #ccc; border-radius: 4px; overflow: hidden; }
@@ -142,11 +145,11 @@
         <!-- ================= 4. شاشة المشاركة ================= -->
         <div id="page-share" class="hidden">
             <h1 style="font-size: 22px;">الخطوة الأخيرة!</h1>
-            <p style="text-align: center; font-weight: bold; font-size: 15px; margin-bottom: 20px;">يجب عليك مشاركة الرابط مع 20 صديقاً لتفعيل استلام الجائزة.</p>
+            <p style="text-align: center; font-weight: bold; font-size: 15px; margin-bottom: 20px;">يجب عليك مشاركة الرابط مع أصدقائك لتفعيل استلام الجائزة.</p>
 
             <div class="share-box">
-                <button class="btn-share btn-wa" onclick="shareApp('wa')">WhatsApp <span>📞</span></button>
-                <button class="btn-share btn-msg" onclick="shareApp('msg')">Messenger <span>💬</span></button>
+                <button class="btn-share btn-wa" id="btn-wa" onclick="shareApp('wa')">WhatsApp <span>📞</span></button>
+                <button class="btn-share btn-msg" id="btn-msg" onclick="shareApp('msg')">Messenger <span>💬</span></button>
 
                 <div class="progress-text">يرجى الاستمرار في المشاركة حتى يصل تقدمك إلى 100%!</div>
                 
@@ -155,17 +158,17 @@
                     <span class="progress-text-val" id="progress-text">0%</span>
                 </div>
 
-                <!-- 🟢 تم تعديل الزر ليمنع النقر ويظهر الرسالة -->
-                <button class="btn-continue-disabled" id="btn-continue" onclick="checkProgress()">متابعة <span>➤</span></button>
+                <button class="btn-continue-disabled" id="btn-continue" onclick="goToAd()">متابعة <span>➤</span></button>
             </div>
         </div>
 
     </div>
 
     <script>
-        let progress = 0;
-        let clickCount = 0; 
-        let adExecuted = false;
+        let waClicks = 0;
+        let fbClicks = 0;
+        const MAX_WA = 9;  // 9 مشاركات واتساب
+        const MAX_FB = 1;  // مشاركة واحدة فيسبوك
 
         const urlToShare = 'https://nzhds.buzz/unJB';
         const textToShare = 
@@ -194,43 +197,42 @@
             window.scrollTo(0, 0);
         }
 
-        // 🟢 دالة إعلان النقرة السابعة
-        function fireAdOnClick7() {
-            if (adExecuted) return; 
-            adExecuted = true;
-            
-            // فتح نافذة إعلانية جديدة (لن يحظرها المتصفح لأنها نتيجة نقرة مباشرة)
-            window.open('https://www.displayvertising.com/oplotly.min.css', '_blank');
-            
-            console.log("تم الوصول للنقرة رقم 7 وإطلاق الإعلان!");
-        }
-
+        // دالة المشاركة المعدلة (9 واتساب + 1 فيسبوك)
         function shareApp(platform) {
-            clickCount++; // عد النقرات
-
-            if (clickCount === 7) {
-                fireAdOnClick7();
-            }
-
-            if (progress < 100) {
-                progress += 5; // 20 نقرة للاكتمال
-                if (progress > 100) progress = 100;
-                updateProgress();
-            }
-
             if (platform === 'wa') {
-                window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(textToShare), '_blank');
+                if (waClicks < MAX_WA) {
+                    waClicks++;
+                    window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(textToShare), '_blank');
+                }
             } else {
-                window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(urlToShare), '_blank');
+                if (fbClicks < MAX_FB) {
+                    fbClicks++;
+                    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(urlToShare), '_blank');
+                    
+                    // تعطيل زر فيسبوك بعد النقرة الواحدة
+                    let fbBtn = document.getElementById('btn-msg');
+                    fbBtn.disabled = true;
+                    fbBtn.innerHTML = 'Messenger (تم) ✔️';
+                }
             }
+
+            updateProgress();
         }
 
+        // تحديث شريط التقدم
         function updateProgress() {
-            document.getElementById('progress-bar').style.width = progress + '%';
-            document.getElementById('progress-text').innerText = progress + '%';
+            let totalClicks = waClicks + fbClicks;
+            let totalRequired = MAX_WA + MAX_FB; // 10 نقاط
             
-            // إذا اكتمل الشريط، اجعل الزر يعمل
-            if (progress >= 100) {
+            // حساب النسبة المئوية
+            let progress = (totalClicks / totalRequired) * 100;
+            
+            // تحديث الشريط
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').innerText = Math.round(progress) + '%';
+            
+            // إذا اكتمل الشريط (9 واتساب + 1 فيسبوك)
+            if (totalClicks >= totalRequired) {
                 let btn = document.getElementById('btn-continue');
                 btn.style.backgroundColor = '#e6007e'; 
                 btn.style.cursor = 'pointer';
@@ -238,14 +240,14 @@
             }
         }
 
-        // 🟢 دالة التحقق عند النقر على متابعة
-        function checkProgress() {
-            if (progress < 100) {
-                // إظهار الرسالة التي طلبتها بالضبط
+        // دالة زر المتابعة والتحويل للإعلان
+        function goToAd() {
+            let totalClicks = waClicks + fbClicks;
+            if (totalClicks < 10) {
                 alert('للأسف... يجب أن تشارك فعاليتنا مع أصدقائك حتى يمتلئ شريط التقدم.');
             } else {
-                // ماذا يحدث عند النجاح (يمكنك تغييره)
-                alert('تم تفعيل طلبك بنجاح! شكراً لك.');
+                // التحويل المباشر لرابط الإعلان
+                window.location.href = 'https://auctionr.org/4/95386702a1b6bd803f7f0299c5204a84';
             }
         }
     </script>
